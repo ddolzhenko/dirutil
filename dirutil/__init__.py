@@ -112,6 +112,11 @@ def safe_mkdir(path):
         mkdir(path)
     return path
 
+def force_mkdir(path):
+    safe_rmdir(path)
+    return mkdir(path)
+
+
 def safe_mktree(path):
     '''Creates not only last folder in path but all
     for mktree('1/2/3')
@@ -138,8 +143,8 @@ def rmdir(path):
     shutil.rmtree(path, onerror=onerror)
 
 def safe_rmdir(path):
-    if exist(path):
-        rmtree()
+    if exists(path):
+        rmdir(path)
 
 
 #-------------------------------------------------------------------------------
@@ -184,7 +189,7 @@ def create_structure(structure, path=''):
             assert data is not None
             if isinstance(data, dict):  # create a folder
                 safe_mkdir(name)
-                create_structure(data, path)
+                create_structure(data, path=name)
             elif isinstance(data, str): # just a file
                 file_write(name, data)
             else:                       # everything else threated as stream
@@ -235,6 +240,9 @@ class work_safe_mkdir(work_dir):
     def __init__(self, path):
         super().__init__(safe_mkdir(path))
 
+class work_force_mkdir(work_dir):
+    def __init__(self, path):
+        super().__init__(force_mkdir(path))
 
 class work_tempdir(work_dir):
     def __init__(self):
@@ -252,18 +260,20 @@ class TestCase(unittest.TestCase):
     def test_1(self):
 
         import yaml
+        import json
 
-        with work_tempdir():
+
+
+        with work_force_mkdir('1-test1'):
             with work_mkdir('.jacis'):
                 with work_mkdir('available'):
                     touch('list.yml')
                 with work_mkdir('installed'):
                     touch('list.yml')
                 with open('config.yml', 'w') as f:
-                    import json
                     f.write(json.dumps([1,2,3,4]))
 
-        with work_tempdir():
+        with work_force_mkdir('1-test2'):
             struct = {
                 ".jacis" : {
                     "available": {
@@ -278,7 +288,8 @@ class TestCase(unittest.TestCase):
             create_structure(struct)
 
 
-        with work_tempdir():
+        # with work_tempdir():
+        with work_force_mkdir('1-test3'):
             yml = '''
             .jacis:
                 available:
@@ -289,6 +300,8 @@ class TestCase(unittest.TestCase):
             '''
             create_structure(yaml.load(yml))
 
+        for x in  ['1-test1', '1-test2', '1-test3']:
+            rmdir(x)
 
 
         print(os.getcwd())
