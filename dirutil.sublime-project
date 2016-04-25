@@ -8,12 +8,19 @@
             "file_regex": "File \"([^\"]+)\", line (\\d+)\\s*.*",
             "selector": "source.yaml, source.python, source.json",
 
-            "cmd": ["python", "-m", "unittest", "$file"],
+            "windows": {
+                "cmd": ["python", "-m", "unittest", "$file"],
+            },
+
+            "linux": {
+                "cmd": ["python3", "-m", "unittest", "$file"],
+            },
 
             "variants":
             [
                 {
                     "name": "test",
+
                     "cmd": ["python", "setup.py", "test"],
                 },
 
@@ -44,8 +51,8 @@
 
     "settings":
     {
-        "font_face": "Menlo",       // better for OSX
-        "font_face": "Consolas",    // better for windows
+        // "font_face": "Menlo",       // better for OSX
+        // "font_face": "Consolas",    // better for windows
 
         "auto_indent": true,
         "smart_indent": true,
