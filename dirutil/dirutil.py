@@ -49,10 +49,5 @@ def im_on_windows():
 
 
 
-def home_dir():
-    if im_on_windows():
-        return os.environ['USERPROFILE']
-
-    return os.path.expanduser('~')
 
 

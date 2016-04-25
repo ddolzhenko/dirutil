@@ -31,9 +31,33 @@ __email__  = "d.dolzhenko@gmail.com"
 
 import os, stat, shutil, tempfile
 
+#-------------------------------------------------------------------------------
+# errors
+#-------------------------------------------------------------------------------
+
 class Error:
     pass
 
+#-------------------------------------------------------------------------------
+#
+#-------------------------------------------------------------------------------
+
+def abspath(path):
+    return os.path.abspath(path)
+
+def cwd():
+    return os.getcwd()
+
+def chdir(path):
+    if path:
+        os.chdir(path)
+    return path
+
+def home():
+    return os.path.expanduser('~')
+if os.name == 'nt' and os.environ['USERPROFILE']:
+    def home():
+        return os.environ['USERPROFILE']
 
 #-------------------------------------------------------------------------------
 # general
@@ -184,11 +208,11 @@ class work_dir(object):
 
     def __enter__(self):
         self._previous = os.getcwd()
-        os.chdir(self._wanted)
+        chdir(self._wanted)
         return self
 
     def __exit__(self, *args):
-        os.chdir(self._previous)
+        chdir(self._previous)
         self._previous = None
 
     @property
