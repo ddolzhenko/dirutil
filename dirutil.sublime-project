@@ -1,0 +1,67 @@
+{
+    "build_systems":
+    [
+        {
+            "name": "dirutil",
+            "working_dir": "${project_path}",
+            // "file_regex": "File \"([^\"]+)\", line (\\d+)\\s*$",
+            "file_regex": "File \"([^\"]+)\", line (\\d+)\\s*.*",
+            "selector": "source.yaml, source.python, source.json",
+
+            "windows": {
+                "cmd": ["python", "-m", "unittest", "$file"],
+            },
+
+            "linux": {
+                "cmd": ["python3", "-m", "unittest", "$file"],
+            },
+
+            "variants":
+            [
+                {
+                    "name": "test",
+
+                    "cmd": ["python", "setup.py", "test"],
+                },
+
+                {
+                    "name": "install",
+                    "cmd": ["python", "setup.py", "install"],
+                },
+
+                {
+                    "name": "clean",
+                    "cmd": ["python", "setup.py", "clean", "--all"],
+                },
+
+            ]
+        },
+
+
+    ],
+
+    "folders":
+    [
+        {
+            "name": "root",
+            "path": ".",
+            "folder_exclude_patterns": ["build"]
+        }
+    ],
+
+    "settings":
+    {
+        // "font_face": "Menlo",       // better for OSX
+        // "font_face": "Consolas",    // better for windows
+
+        "auto_indent": true,
+        "smart_indent": true,
+        "spell_check": true,
+        "tab_size": 4,
+        "translate_tabs_to_spaces": true,
+        "trim_automatic_white_space": true,
+        "trim_trailing_white_space_on_save": true,
+        "word_wrap": "false"
+    }
+
+}
