@@ -316,12 +316,12 @@ class TestCase(unittest.TestCase):
             print('path2: ', os.getcwd())
 
 
-        with work_dir('/usr') as w:
-            print(os.getcwd())
-            print(w.current)
-            print(w.previous)
+        # with work_dir('/usr') as w:
+        #     print(os.getcwd())
+        #     print(w.current)
+        #     print(w.previous)
 
         print('-'*100)
 
         print(os.getcwd())
-        print(w.current)
+        # print(w.current)
