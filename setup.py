@@ -4,7 +4,7 @@ from setuptools import setup, find_packages
 setup(
 
     name         = 'dirutil',
-    version      = '0.1',
+    version      = '0.2',
 
     description  = 'High level directory utilities',
     keywords     = ['dir', 'directory', 'workdir', 'tempdir'],
@@ -16,11 +16,12 @@ setup(
     test_suite   = 'dirutil.get_tests',
 
     url          = 'https://github.com/ddolzhenko/dirutil',
-    download_url = 'https://github.com/ddolzhenko/dirutil/archive/0.1.tar.gz',
+    # download_url = 'https://github.com/ddolzhenko/dirutil/archive/0.1.tar.gz',
+    download_url = 'https://github.com/ddolzhenko/dirutil/archive/v0.2.tar.gz',
 
     classifiers  = [],
     install_requires = [
-        "checksumdir==1.0.5",
+        # "checksumdir==1.0.5",
     ],
 )
 
