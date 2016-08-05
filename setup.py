@@ -1,10 +1,11 @@
 from setuptools import setup, find_packages
 
+ver = "0.3"
 
 setup(
 
     name         = 'dirutil',
-    version      = '0.2',
+    version      = ver,
 
     description  = 'High level directory utilities',
     keywords     = ['dir', 'directory', 'workdir', 'tempdir'],
@@ -16,8 +17,7 @@ setup(
     test_suite   = 'dirutil.get_tests',
 
     url          = 'https://github.com/ddolzhenko/dirutil',
-    # download_url = 'https://github.com/ddolzhenko/dirutil/archive/0.1.tar.gz',
-    download_url = 'https://github.com/ddolzhenko/dirutil/archive/v0.2.tar.gz',
+    download_url = 'https://github.com/ddolzhenko/dirutil/archive/v{}.tar.gz'.format(ver),
 
     classifiers  = [],
     install_requires = [
