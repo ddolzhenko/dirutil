@@ -70,10 +70,10 @@ def exists(path):
     return os.path.exists(path)
 
 def isdir(path):
-    return os.isdir(path)
+    return os.path.isdir(path)
 
 def isfile(path):
-    return os.isfile(path)
+    return os.path.isfile(path)
 
 #-------------------------------------------------------------------------------
 # files
