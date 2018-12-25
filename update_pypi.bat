@@ -1,13 +1,7 @@
-
 rem @echo off
-
 @echo Continue?
 @pause
-python setup.py register -r pypitest
+twine upload --repository testpypi dist/*
 @pause
-python setup.py sdist upload -r pypitest
-@pause
-python setup.py register -r pypi
-@pause
-python setup.py sdist upload -r pypi
+twine upload --repository pypi dist/* 
 @pause
