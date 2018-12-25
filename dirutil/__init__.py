@@ -158,14 +158,13 @@ def remove(path):
         rmfile(path)
     elif isdir(path):
         rmdir(path)
-
-    raise Error('unknown object type "{}"'.format(path))
+    else:
+        raise Error('unknown object type "{}"'.format(path))
 
 
 def safe_remove(path):
-    if not exists(path):
-        return
-    remove(path)
+    if exists(path):
+        remove(path)
 
 
 def create_structure(structure, path=''):
